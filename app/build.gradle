@@ -1,0 +1,93 @@
+import com.mapeiyu.ExcluderPlugin
+
+apply plugin: ExcluderPlugin
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.0"
+    defaultConfig {
+        applicationId "com.mapeiyu.apkeditor"
+        minSdkVersion 21
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        white {
+        }
+
+        black {
+        }
+    }
+
+    packagingOptions {
+//        exclude '/classes.dex'
+//        exclude '/res/layout/**'
+//        exclude '/resources.arsc'
+//        exclude '/META-INF/**'
+//        exclude '/assets/PackageExcluder.zip'
+//        exclude '/lib/armeabi/**'
+//        exclude '/AndroidManifest.xml'
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    testCompile 'junit:junit:4.12'
+}
+
+tasks.findAll {t ->
+
+
+}
+
+excluder {
+    black {
+        exclude '/res/**'
+        exclude '/lib/**'
+    }
+
+    blackDebug {
+        exclude '/META-INF/**'
+    }
+}
+
+
+//tasks.getByName("assemble"){
+//    it.doLast{
+//        println "$project.name: After assemble, jar libs are copied tolocal repository"
+//        println it.outputs.files.files
+//    }
+//}
+//getGradle().useLogger(new CustomEventLogger())
+//
+//class CustomEventLogger extends BuildAdapter implements TaskExecutionListener {
+//
+//    public void beforeExecute(Task task) {
+//        println "[$task.name]"
+//    }
+//
+//    public void afterExecute(Task task, TaskState state) {
+//        println()
+//    }
+//
+//    public void buildFinished(BuildResult result) {
+//        println 'build completed'
+//        if (result.failure != null) {
+//            result.failure.printStackTrace()
+//        }
+//    }
+//}
