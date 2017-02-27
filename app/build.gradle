@@ -28,16 +28,6 @@ android {
         black {
         }
     }
-
-    packagingOptions {
-//        exclude '/classes.dex'
-//        exclude '/res/layout/**'
-//        exclude '/resources.arsc'
-//        exclude '/META-INF/**'
-//        exclude '/assets/PackageExcluder.zip'
-//        exclude '/lib/armeabi/**'
-//        exclude '/AndroidManifest.xml'
-    }
 }
 
 dependencies {
@@ -49,29 +39,15 @@ dependencies {
     testCompile 'junit:junit:4.12'
 }
 
-tasks.findAll {t ->
-
-
-}
-
-excluder {
-    black {
-        exclude '/res/**'
-        exclude '/lib/**'
-    }
+apkEditor {
+//    exclude '/assets/**'
+    exclude 'lib/**'
 
     blackDebug {
-        exclude '/META-INF/**'
+        exclude 'res/**/*.png'
     }
 }
 
-
-//tasks.getByName("assemble"){
-//    it.doLast{
-//        println "$project.name: After assemble, jar libs are copied tolocal repository"
-//        println it.outputs.files.files
-//    }
-//}
 //getGradle().useLogger(new CustomEventLogger())
 //
 //class CustomEventLogger extends BuildAdapter implements TaskExecutionListener {

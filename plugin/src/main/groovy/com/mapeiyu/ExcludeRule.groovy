@@ -2,16 +2,15 @@ package com.mapeiyu
 
 import org.gradle.api.tasks.Input
 
-class Rule {
+class ExcludeRule {
     final String name
     List<String> excludeList = []
 
-    Rule(String name) {
+    ExcludeRule(String name) {
         this.name = name
     }
 
-    @Input
-    void exclude(String...args) {
-        excludeList += Arrays.asList(args)
+    void exclude(String... list) {
+        excludeList += Arrays.asList(list)
     }
 }

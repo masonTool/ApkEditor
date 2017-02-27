@@ -8,9 +8,9 @@ import java.util.zip.ZipOutputStream
 
 class ZipUtil {
 
-    static void updateZip(Project project, File target, String...excludes) {
-        println "updatezip: $target exclude: $excludes"
-        if (excludes.size() == 0) {
+    static void updateZip(Project project, File target, List<String> excludes) {
+        project.logger.debug "updatezip: $target exclude: $excludes"
+        if (excludes.empty) {
             return
         }
 
