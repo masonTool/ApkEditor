@@ -1,0 +1,23 @@
+apply plugin: 'groovy'
+apply from: '../bintray.gradle'
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+    testCompile 'junit:junit:4.12'
+}
+
+group "com.mapeiyu.$project.name"
+version "1.0.0"
+
+// for test with local repo
+//apply plugin: 'maven'
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            repository(url: "file:///home/mapeiyu/ATemp/TestRepo/")
+//            pom.artifactId = project.name
+//        }
+//    }
+//}
+

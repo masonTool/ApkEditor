@@ -1,0 +1,76 @@
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+
+def parientName = getRootProject().name
+def gitUrl = "https://github.com/masonTool/$parientName"
+
+install {
+    repositories.mavenInstaller {
+        // This generates POM.xml with proper paramters
+        pom.project {
+
+            //添加项目描述
+            name parientName
+            url gitUrl
+
+            //设置开源证书信息
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                }
+            }
+            //添加开发者信息
+            developers {
+                developer {
+                    name 'MaPeiyu'
+                    email 'mason.mpy@gmail.com'
+                }
+            }
+
+            scm {
+                connection gitUrl
+                developerConnection gitUrl
+                url gitUrl
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    classifier = 'sources'
+}
+
+
+task javadocJar(type: Jar, dependsOn: groovydoc) {
+    from groovydoc.destinationDir
+    classifier = 'javadoc'
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+//配置上传Bintray相关信息
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+bintray {
+    user = properties.getProperty("bintray.user")
+    key = properties.getProperty("bintray.apikey")
+
+    configurations = ['archives']
+    pkg {
+        repo = 'maven' // 上传到中央仓库的名称
+        name = parientName // 上传到jcenter 的项目名称
+        desc = 'When dependencies aar has redundant resources such as .png, assets, .so  etc. Give you ability to remove it through the packaging process. ' // 项目描述
+        websiteUrl = gitUrl
+        issueTrackerUrl = gitUrl
+        vcsUrl = gitUrl
+        labels = ['gradle', 'plugin']
+        licenses = ['Apache-2.0']
+        publish = true
+    }
+}

@@ -1,7 +1,5 @@
 package com.mapeiyu
 
-import org.gradle.api.tasks.Input
-
 class ExcludeRule {
     final String name
     List<String> excludeList = []

@@ -6,7 +6,7 @@ dependencies {
 }
 sourceSets {
     main {
-        groovy.srcDirs = ["../plugin/src/main/groovy"]
-        resources.srcDirs = ["../plugin/src/main/resources"]
+        groovy.srcDirs = ["../apkeditor/src/main/groovy"]
+        resources.srcDirs = ["../apkeditor/src/main/resources"]
     }
 }

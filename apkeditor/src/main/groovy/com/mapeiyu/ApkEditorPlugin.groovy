@@ -4,9 +4,9 @@ import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
-class ExcluderPlugin implements Plugin<Project> {
+class ApkEditorPlugin implements Plugin<Project> {
 
-    static String PLUGIN_SCOPE = "apkEditor"
+    static String PLUGIN_SCOPE = "apkeditor"
 
     @Override
     void apply(Project project) {
@@ -32,7 +32,7 @@ class ExcluderPlugin implements Plugin<Project> {
         project.afterEvaluate {
             if (!project.plugins.findPlugin('com.android.application')) {
                 throw new GradleException(
-                        'You must apply the android application plugin for the ExcluderPlugin')
+                        'You must apply the android application plugin for the ApkEditorPlugin')
             }
 
             project.android.applicationVariants.all { variant ->
