@@ -21,7 +21,7 @@ Download & Use
 	        jcenter()
 	    }
 	    dependencies {
-	        classpath 'com.mapeiyu.apkeditor:apkeditor:1.0.0'
+	        classpath 'com.mapeiyu.apkeditor:apkeditor:1.0.1'
 	    }
 	}
 	apply plugin: 'apkeditor'
@@ -30,19 +30,17 @@ Download & Use
 
 	```
 	apkeditor {
-	    exclude '/assets/**'
-	    release {
-	        exclude 'lib/**'
-	    }
-	    debug {
-	        exclude 'res/**/*.png'
-	        exclude 'res/**/*.xml'
-	    }
-	    //suppose you have a flavor named black
-	    blackDebug { 
-	    	exclude 'lib/**'
-		}
-	}
+        exclude '/assets/**/sb/*.so'
+
+        release {
+            exclude 'lib/armeabi/**'
+        }
+        //suppose you have a flavor named black
+        blackDebug {
+            exclude '/res/layout/**'
+            exclude 'res/drawable*/*.xml'
+        }
+    }
 	```
 4. Then build or install as normal. The Apk generated will packaged without above rousources which match the rules.
 

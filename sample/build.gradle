@@ -66,14 +66,15 @@ dependencies {
 }
 
 apkeditor {
-    exclude '/assets/**'
+    exclude '/assets/**/sb/*.so'
 
     white {
-        exclude 'lib/**'
+        exclude 'lib/armeabi/**'
     }
 
     blackDebug {
-        exclude 'res/**/*.png'
+        exclude '/res/layout/**'
+        exclude 'res/drawable*/*.xml'
     }
 }
 

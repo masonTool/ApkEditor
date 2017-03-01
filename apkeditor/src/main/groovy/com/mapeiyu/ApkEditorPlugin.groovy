@@ -75,6 +75,9 @@ class ApkEditorPlugin implements Plugin<Project> {
      * @param excludeList
      */
     def void doExclude(def project, def task, def excludeList) {
+        if (excludeList.empty) {
+            return
+        }
         project.logger.quiet "$task - The excludeList: $excludeList"
 
         def jniExcludeList = []
@@ -88,9 +91,9 @@ class ApkEditorPlugin implements Plugin<Project> {
             }
 
             if (rule.startsWith('lib/')) {
-                jniExcludeList << rule.substring(4)
+                jniExcludeList << rule
             } else if (rule.startsWith('res/')) {
-                resExcludeList << rule.substring(4)
+                resExcludeList << rule
             } else if (rule.startsWith('assets/')) {
                 assetExcludeList << rule.substring(7)
             } else {
@@ -100,6 +103,8 @@ class ApkEditorPlugin implements Plugin<Project> {
                 assetExcludeList << rule
             }
         }
+
+// TODO Collection<File> javaRes = task.javaResourceFiles
 
         if (!jniExcludeList.empty) {
             task.jniFolders.each {folder ->

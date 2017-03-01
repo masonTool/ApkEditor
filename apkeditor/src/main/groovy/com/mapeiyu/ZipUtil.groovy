@@ -34,6 +34,7 @@ class ZipUtil {
             input.close()
         }
         zipOut.close()
+        tmp.delete()
     }
 
 

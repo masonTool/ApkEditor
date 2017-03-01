@@ -20,7 +20,7 @@ ApkEditor是一个Android应用的Gradle插件.
 	        jcenter()
 	    }
 	    dependencies {
-	        classpath 'com.mapeiyu.apkeditor:apkeditor:1.0.0'
+	        classpath 'com.mapeiyu.apkeditor:apkeditor:1.0.1'
 	    }
 	}
 	apply plugin: 'apkeditor'
@@ -28,20 +28,18 @@ ApkEditor是一个Android应用的Gradle插件.
 3. 使用`apkeditor` 插件DSL:
 
 	```
-	apkeditor {
-	    exclude '/assets/**'
-	    release {
-	        exclude 'lib/**'
-	    }
-	    debug {
-	        exclude 'res/**/*.png'
-	        exclude 'res/**/*.xml'
-	    }
-	    //如果你设置了一个名为black的flavor
-	    blackDebug { 
-	    	exclude 'lib/**'
-		}
-	}
+		apkeditor {
+            exclude '/assets/**/sb/*.so'
+
+            release {
+                exclude 'lib/armeabi/**'
+            }
+            //假定你设置了一个名为black的flavor
+            blackDebug {
+                exclude '/res/layout/**'
+                exclude 'res/drawable*/*.xml'
+            }
+        }
 	```
 4. 然后正常构建或者安装. 生成的apk将会被打包成不含上述规则的资源
 
