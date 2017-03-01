@@ -1,4 +1,4 @@
-//for test with local repo
+//For test with local repo
 //buildscript {
 //    repositories {
 //        maven {
@@ -11,21 +11,19 @@
 //}
 //apply plugin: 'apkeditor'
 
-//for test with buildSrc
-//import com.mapeiyu.ApkEditorPlugin
-//apply plugin: ApkEditorPlugin
-
-buildscript {
-    repositories {
-        jcenter()
-        maven {
-            url 'https://dl.bintray.com/mapeiyu/maven/'
-        }
-    }
-    dependencies {
-        classpath 'com.mapeiyu.apkeditor:apkeditor:1.0.0'
-    }
-}
+//Common Setting!!!!
+//Because of buildSrc, This common setting is invalid. You can try this in another project
+//buildscript {
+//    repositories {
+//        jcenter()
+//        maven {
+//            url 'https://dl.bintray.com/mapeiyu/maven/'
+//        }
+//    }
+//    dependencies {
+//        classpath 'com.mapeiyu.apkeditor:apkeditor:1.0.3'
+//    }
+//}
 apply plugin: 'apkeditor'
 apply plugin: 'com.android.application'
 

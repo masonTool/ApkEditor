@@ -6,7 +6,7 @@ import org.gradle.api.file.FileTree
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
-class ZipUtil {
+class Utils {
 
     static void updateZip(Project project, File target, List<String> excludes) {
         project.logger.debug "updatezip: $target exclude: $excludes"
@@ -35,6 +35,25 @@ class ZipUtil {
         }
         zipOut.close()
         tmp.delete()
+    }
+
+    /**
+     * We should expand it with a more flexible method.
+     * Perhaps write another gradle plugin to intervene the groovy compile process.
+     * Just like the android.application plugin do. They generate a class Named BuidConfig.class to store the static values.
+     * @param project
+     * @return
+     */
+    static String getUserBuildScriptClassPath(Project project, String specify) {
+        def path = project.buildscript.configurations.classpath.find {
+            it.absolutePath.contains(specify)
+        }
+        if (!path) {
+            path = project.rootProject.buildscript.configurations.classpath.find {
+                it.absolutePath.contains(specify)
+            }
+        }
+        return path.toString()
     }
 
 

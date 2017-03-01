@@ -6,10 +6,17 @@ import org.gradle.api.Project
 
 class ApkEditorPlugin implements Plugin<Project> {
 
-    static String PLUGIN_SCOPE = "apkeditor"
+    static String PLUGIN_SCOPE = 'apkeditor'
+    static String SPECIFY = 'com.mapeiyu.apkeditor/apkeditor'
+
+    //Used to forbid the Up-to-date caches when this plugin is updated. So I record the classpath in plugin user's config
+    String versionInfo
 
     @Override
     void apply(Project project) {
+
+        versionInfo = Utils.getUserBuildScriptClassPath(project, SPECIFY)
+        project.logger.quiet "apkeditor's version file: $versionInfo"
 
         //used for container's exclude. means effect for specified variant. i.g.
         //apk {
@@ -59,6 +66,7 @@ class ApkEditorPlugin implements Plugin<Project> {
                     def packageApplicationTask = output.packageApplication
                     //Up-to-date checks  {https://docs.gradle.org/current/userguide/more_about_tasks.html}
                     packageApplicationTask.inputs.property("exlude", excludeList)
+                    packageApplicationTask.inputs.property("versionInfo", versionInfo)
 
                     packageApplicationTask.doFirst {task ->
                         doExclude(project, task, excludeList)
@@ -104,6 +112,7 @@ class ApkEditorPlugin implements Plugin<Project> {
             }
         }
 
+
 // TODO Collection<File> javaRes = task.javaResourceFiles
 
         if (!jniExcludeList.empty) {
@@ -117,7 +126,7 @@ class ApkEditorPlugin implements Plugin<Project> {
 
         if (!resExcludeList.empty) {
             project.logger.quiet "$task - resource exclude: $resExcludeList"
-            ZipUtil.updateZip(project, task.resourceFile, resExcludeList)
+            Utils.updateZip(project, task.resourceFile, resExcludeList)
         }
 
         if (!dexExcludeList.empty) {

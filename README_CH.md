@@ -20,7 +20,7 @@ ApkEditor是一个Android应用的Gradle插件.
 	        jcenter()
 	    }
 	    dependencies {
-	        classpath 'com.mapeiyu.apkeditor:apkeditor:1.0.1'
+	        classpath 'com.mapeiyu.apkeditor:apkeditor:1.0.3'
 	    }
 	}
 	apply plugin: 'apkeditor'
