@@ -19,7 +19,7 @@ class ApkEditorPlugin implements Plugin<Project> {
         project.logger.quiet "apkeditor's version file: $versionInfo"
 
         //used for container's exclude. means effect for specified variant. i.g.
-        //apk {
+        //apkeditor {
         //  debug {
         //      exclude '**/**'
         //  }
@@ -29,7 +29,7 @@ class ApkEditorPlugin implements Plugin<Project> {
 
         def original = []
         //used for delegate method execute for exclude. means effect for all. i.g.
-        //apk {
+        //apkeditor {
         //  exclude '**/**'
         //}
         project.metaClass.'exclude' = { a ->
